@@ -1,0 +1,48 @@
+#results_field {
+    display: flex;
+    flex-flow: column;
+}
+
+#input {
+    padding: 5px;
+    width: auto;
+    border: 1px solid black;
+}
+
+label {
+    margin: 5px;
+}
+
+#input {
+    display: flex;
+    flex-flow: column;
+}
+
+#size {
+    width: 60px;
+    margin: 5px;
+}
+
+.number_input, .b_input {
+    width: 60px;
+}
+
+#calculate {
+    margin: 5px;
+    width: 80px;
+}
+
+#matrix {
+    margin: 5px;
+    display: flex;
+    flex-flow: column;
+    width: auto;
+}
+
+.input_row {
+    width: auto;
+}
+
+.number_input {
+    margin: 1px;
+}
