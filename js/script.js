@@ -66,6 +66,203 @@ function Cramer(matrix, vector) {
     return x;
 }
 
+
+var abs = Math.abs;
+
+function array_fill(i, n, v) {
+    var a = [];
+    for (; i < n; i++) {
+        a.push(v);
+    }
+    return a;
+}
+
+function Gaussian(A, x) {
+
+    var i, k, j;
+
+    console.table(A)
+
+    // Just make a single matrix
+    for (i=0; i < A.length; i++) { 
+        A[i].push(x[i]);
+    }
+    var n = A.length;
+
+    console.table(A)
+
+    for (i=0; i < n; i++) { 
+        // Search for maximum in this column
+        var maxEl = abs(A[i][i]),
+            maxRow = i;
+        for (k=i+1; k < n; k++) { 
+            if (abs(A[k][i]) > maxEl) {
+                maxEl = abs(A[k][i]);
+                maxRow = k;
+            }
+        }
+
+
+        // Swap maximum row with current row (column by column)
+        for (k=i; k < n+1; k++) { 
+            var tmp = A[maxRow][k];
+            A[maxRow][k] = A[i][k];
+            A[i][k] = tmp;
+        }
+
+        // Make all rows below this one 0 in current column
+        for (k=i+1; k < n; k++) { 
+            var c = -A[k][i]/A[i][i];
+            for (j=i; j < n+1; j++) { 
+                if (i===j) {
+                    A[k][j] = 0;
+                } else {
+                    A[k][j] += c * A[i][j];
+                }
+            }
+        }
+    }
+
+    // Solve equation Ax=b for an upper triangular matrix A
+    x = array_fill(0, n, 0);
+    // 0 0 0
+    for (i=n-1; i > -1; i--) { 
+        x[i] = A[i][n]/A[i][i];
+        for (k=i-1; k > -1; k--) { 
+            A[k][n] -= A[k][i] * x[i];
+        }
+    }
+    // nan nan nan
+
+    return x;
+}
+
+
+    // function solve(m, b) {
+    //     let lu = ludcmp(m)
+    //     if (lu === undefined) return 
+    //     return lubksb(lu, b)
+    // }
+    
+
+    // function ludcmp(m) {
+    //     let d = true
+    //     let n = m.length
+    //     let idx = new Array(n) 
+    //     let vv = new Array(n)  
+    
+    //     for (let i = 0; i < n; i++) {
+    //         let max = 0
+    //         for (let j = 0; j < n; j++) {
+    //             let temp = Math.abs(m[i][j])
+    //             if (temp > max) max = temp
+    //         }
+    //         if (max == 0) return 
+    //         vv[i] = 1 / max 
+    //     }
+    
+    //     let Acpy = new Array(n)
+    //     for (let i = 0; i < n; i++) {		
+    //         let Ai = m[i] 
+    //         Acpyi = new Array(Ai.length)
+
+    //         for (j = 0; j < Ai.length; j += 1) 
+    //             Acpyi[j] = Ai[j]
+
+    //         Acpy[i] = Acpyi
+    //     }
+    //     m = Acpy
+    
+    //     let tiny = 1e-20 
+    //     for (let i = 0; ; i++) {
+
+    //         for (let j = 0; j < i; j++) {
+    //             let sum = m[j][i]
+
+    //             for (let k = 0; k < j; k++) 
+    //                 sum -= m[j][k] * m[k][i];
+
+    //             m[j][i] = sum
+    //         }
+
+    //         let jmax = 0
+    //         let max = 0;
+
+    //         for (let j = i; j < n; j++) {
+    //             let sum = m[j][i]
+
+    //             for (let k = 0; k < i; k++) 
+    //                 sum -= m[j][k] * m[k][i];
+
+    //             m[j][i] = sum
+    //             let temp = vv[j] * Math.abs(sum)
+
+    //             if (temp >= max) {
+    //                 max = temp
+    //                 jmax = j
+    //             }
+    //         }
+
+    //         if (i <= jmax) {
+
+    //             for (let j = 0; j < n; j++) {
+    //                 let temp = m[jmax][j]
+    //                 m[jmax][j] = m[i][j]
+    //                 m[i][j] = temp
+    //             }
+
+    //             d = !d;
+    //             vv[jmax] = vv[i]
+    //         }
+    //         idx[i] = jmax;
+
+    //         if (i == n-1) 
+    //             break;
+
+    //         let temp = m[i][i]
+
+    //         if (temp == 0) 
+    //             m[i][i] = temp = tiny
+
+    //         temp = 1 / temp
+    //         for (let j = i + 1; j < n; j++) 
+    //             m[j][i] *= temp
+    //     }
+
+    //     console.log({m:m, idx:idx, d:d});
+    //     return {m:m, idx:idx, d:d}
+    // }
+    
+    // function lubksb(lu, b) {
+       
+    //     let m = lu.m
+    //     let idx = lu.idx
+    //     let n = idx.length
+    
+    //     let bcpy = new Array(n) 
+    //     for (let i=0; i<b.length; i+=1) bcpy[i] = b[i]
+    //     b = bcpy
+    
+    //     for (let ii =- 1, i = 0; i < n; i++) {
+    //         let ix = idx[i]
+    //         let sum = b[ix]
+    //         b[ix] = b[i]
+    //         if (ii > -1)
+    //             for (let j = ii; j < i; j++) sum -= m[i][j] * b[j]
+    //         else if (sum)
+    //             ii = i
+    //         b[i] = sum
+    //     }
+    //     for (let i=n-1; i>=0; i--) {
+    //         let sum = b[i]
+    //         for (let j=i+1; j<n; j++) sum -= m[i][j] * b[j]
+    //         b[i] = sum / m[i][i]
+    //     }
+    //     return b // solution vector x
+    // }
+
+    // return solve(matrix, vector)
+
 let matrix_size = document.getElementById('size')
 let matrix_input = document.getElementById('matrix')
 
@@ -141,10 +338,8 @@ calculate.onclick = () => {
 
     matrix_A = chunk(input, matrix_size.value)
 
-    console.log(matrix_A)
-    console.log(vector_B)
-
-    vector_X = Cramer(matrix_A, vector_B)
+    vector_X = Gaussian(matrix_A, vector_B)
+    //vector_X = Cramer(matrix_A, vector_B)
     console.log(vector_X)
 }
 
@@ -158,5 +353,3 @@ calculate.onclick = () => {
 
 // let test_B = [30, 150, 110]
 // let test_X = [] //-152 270 -254
-
-//cramersRule(test_A, test_B);
