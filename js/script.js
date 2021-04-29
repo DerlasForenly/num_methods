@@ -19,6 +19,9 @@ calculate.onclick = () => {
         case "Gauss–Seidel method":
             selected_method = Gauss_Seidel
             break
+        case "Gauss_Jordan method":
+            selected_method = Gauss_Jordan
+            break
         default:
             break
     }
