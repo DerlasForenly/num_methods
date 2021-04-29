@@ -13,6 +13,13 @@
         <div class="input_row">
             <label>Size:</label>
             <input type="number" id="size" value="3" min="2" max="20">
+            <label>Method:</label>
+            <select id="method">
+                <option>Cramer's rule</option>
+                <option>Gaussian elimination</option>
+                <option>Gauss–Seidel method</option>
+            </select>
+            <input type="file" id="file">
         </div>
 
         <div id="matrix">
@@ -26,7 +33,12 @@
         </div>
     </div>
 
-    
-    
+    <script src="js/matrix.js"></script>
+    <script src="js/render.js"></script>
+    <script src="js/det.js"></script>
+    <script src="js/Cramer.js"></script>
+    <script src="js/Gaussian.js"></script>
+    <script src="js/Gauss_Seidel.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>

@@ -46,3 +46,7 @@ label {
 .number_input {
     margin: 1px;
 }
+
+#file {
+    margin-left: 10px;
+}
