@@ -72,6 +72,9 @@ file_input.onchange = () => {
 
     reader.onload = function() {
         let matrix = reader.result.split('\n')
+
+        if (matrix[matrix.length - 1] == '') matrix.pop()
+        
         matrix_size.value = matrix.length
         for (let i = 0; i < matrix.length; i++) {
             matrix[i] = matrix[i].split(' ')

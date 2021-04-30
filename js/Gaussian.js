@@ -37,6 +37,10 @@ function Gaussian(matrix, b) {
         for (let k = i + 1; k < n; k++) {
              
             let c = parseFloat(-matrix[k][i] / matrix[i][i])
+
+            console.table(matrix)
+            console.log(c)
+
             for (let j = i; j < n + 1; j++) { 
                 if (i === j) {
                     matrix[k][j] = 0
