@@ -31,6 +31,12 @@ for (let i = 0; i < matrix_size.value; i++) {
     matrix_input.appendChild(div)
 }
 
+method.onchange = () => {
+    file_input.files[0] = undefined
+    deleteChilds(resultsField)
+    success_or_fail.textContent = ""
+    roots.textContent = ""
+}
 
 matrix_size.onchange = () => {
     file_input.files[0] = undefined

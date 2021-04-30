@@ -1,6 +1,6 @@
 function Gauss_Seidel(matrix, b) {
     if (check_diag(matrix) === false) {
-        return false
+        //return false
     }
 
     matrix = createCopy(matrix)
