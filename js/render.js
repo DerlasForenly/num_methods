@@ -4,6 +4,7 @@ let resultsField = document.getElementById('results_field')
 let method = document.getElementById('method')
 let file_input = document.getElementById('file')
 let success_or_fail = document.getElementById('success')
+let roots = document.getElementById('roots')
 
 for (let i = 0; i < matrix_size.value; i++) {
     let div = document.createElement("div")
@@ -34,6 +35,9 @@ for (let i = 0; i < matrix_size.value; i++) {
 matrix_size.onchange = () => {
     file_input.files[0] = undefined
     deleteChilds(matrix_input)
+    deleteChilds(resultsField)
+    success_or_fail.textContent = ""
+    roots.textContent = ""
 
     for (let i = 0; i < matrix_size.value; i++) {
         let div = document.createElement("div")
@@ -63,6 +67,9 @@ matrix_size.onchange = () => {
 
 file_input.onchange = () => {
     deleteChilds(matrix_input)
+    deleteChilds(resultsField)
+    success_or_fail.textContent = ""
+    roots.textContent = ""
 
     let file = file_input.files[0]
 
@@ -74,11 +81,20 @@ file_input.onchange = () => {
         let matrix = reader.result.split('\n')
 
         if (matrix[matrix.length - 1] == '') matrix.pop()
+        matrix = matrix.slice(1, matrix.length)
+  
         
-        matrix_size.value = matrix.length
         for (let i = 0; i < matrix.length; i++) {
             matrix[i] = matrix[i].split(' ')
         }
+        for (let i = matrix.length / 2 - 1; i >= 0 ; i--) {
+            let tmp = matrix[matrix.length - 1]
+            matrix[i].push(tmp[0])
+            matrix.pop()
+        }
+        matrix_size.value = matrix.length
+
+        console.table(matrix)
 
         for (let i = 0; i < matrix.length; i++) {
             let div = document.createElement("div")
