@@ -3,6 +3,7 @@ let matrix_input = document.getElementById('matrix')
 let resultsField = document.getElementById('results_field')
 let method = document.getElementById('method')
 let file_input = document.getElementById('file')
+let success_or_fail = document.getElementById('success')
 
 for (let i = 0; i < matrix_size.value; i++) {
     let div = document.createElement("div")

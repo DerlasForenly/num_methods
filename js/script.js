@@ -1,20 +1,12 @@
 calculate.onclick = () => {
-    // let matrix_A = [
-    //     [2, 5, 4],
-    //     [1, 3, 2],
-    //     [2, 10, 9]
-    // ]
-    // let vector_B = [30, 150, 110]
-    // let vector_X = [] //-152 270 -254
-
     let selected_method
 
     switch (method.value) {
         case "Cramer's rule":
-            selected_method = Cramer;
+            selected_method = Cramer
             break
         case "Gaussian elimination":
-            selected_method = Gaussian;
+            selected_method = Gaussian
             break
         case "Gauss–Seidel method":
             selected_method = Gauss_Seidel
@@ -42,6 +34,8 @@ calculate.onclick = () => {
     matrix_A = chunk(input, matrix_size.value)
     vector_X = selected_method(matrix_A, vector_B)
 
+    if (vector_X === false) success_or_fail.textContent = "failed"
+    else success_or_fail.textContent = "success"
+
     renderResults(vector_X)
 }
-
