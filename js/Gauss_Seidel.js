@@ -1,6 +1,9 @@
 function Gauss_Seidel(matrix, b) {
-    if (check_diag(matrix) === false) {
-        //return false
+    if (!invertible(matrix)) {
+        return false
+    }
+    if (!check_diag(matrix)) {
+        return false
     }
 
     matrix = createCopy(matrix)
@@ -29,6 +32,7 @@ function Gauss_Seidel(matrix, b) {
     matrix = createCopy(matrix)
 
     do {
+        console.log('iterations.....')
         for (let i = 0; i < n; i++) {
             x[i] = f(matrix[i], i, x_tmp)
             e[i] = Math.abs(x_tmp[i] - x[i])

@@ -16,3 +16,8 @@ function createCopy(matrix) {
     }
     return copy
 }
+
+function invertible(matrix, b) {
+    if (det(matrix) === 0) return false
+    return true
+}

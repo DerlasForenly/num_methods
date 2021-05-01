@@ -1,17 +1,18 @@
 function Gaussian(matrix, b) {
+    if (!invertible(matrix)) {
+        return false
+    }
+
     let n = matrix.length
     let x = array_fill(0, n, 0)
 
     function array_fill(i, n, v) {
         let a = []
-        for (; i < n; i++) {
-            a.push(v)
-        }
+        for (; i < n; i++) a.push(v)
         return a
     }
     matrix = createCopy(matrix)
 
-    //Соеденяем вектор и матрицу
     for (let i = 0; i < n; i++) { 
         matrix[i].push(b[i])
     }
@@ -33,26 +34,18 @@ function Gaussian(matrix, b) {
             matrix[i][k] = tmp
         }
 
-        // Make all rows below this one 0 in current column
         for (let k = i + 1; k < n; k++) {
-             
             let c = parseFloat(-matrix[k][i] / matrix[i][i])
 
-            console.table(matrix)
-            console.log(c)
-
             for (let j = i; j < n + 1; j++) { 
-                if (i === j) {
+                if (i === j)
                     matrix[k][j] = 0
-                } else {
+                else
                     matrix[k][j] = parseFloat(matrix[k][j]) + parseFloat(c) * parseFloat(matrix[i][j])
-                }
             }
         }
     }
     
-
-    // Solve equation Ax=b for an upper triangular matrix matrix
     for (let i = n - 1; i > -1; i--) { 
         x[i] = matrix[i][n] / matrix[i][i];
         for (let k = i - 1; k > -1; k--) { 

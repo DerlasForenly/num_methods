@@ -2,6 +2,9 @@ function Jacobi(matrix, b) {
     if (check_diag(matrix) === false) {
         return false
     }
+    if (!invertible(matrix)) {
+        return false
+    }
 
     matrix = createCopy(matrix)
     let n = matrix.length

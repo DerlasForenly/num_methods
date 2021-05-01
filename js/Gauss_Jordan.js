@@ -1,4 +1,7 @@
 function Gauss_Jordan(matrix, b) {
+    if (!invertible(matrix)) {
+        return false
+    }
     let x = []
     let n = matrix.length
     matrix = createCopy(matrix)

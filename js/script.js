@@ -35,14 +35,22 @@ calculate.onclick = () => {
     }
 
     matrix_A = chunk(input, matrix_size.value)
-    vector_X = selected_method(matrix_A, vector_B)
-
-    if (vector_X === false) success_or_fail.textContent = "Calculations failed"
-    else {
-        if (check_roots(matrix_A, vector_B, vector_X) === false) roots.textContent = "Roots don't fit"
-        else roots.textContent = "Roots fit"
-        success_or_fail.textContent = "Calculations were successful"
+    if (selected_method == Cramer && matrix_A.length > 4) {
+        success_or_fail.textContent = "SOLE is too big for this method"
     }
+    else {
+        vector_X = selected_method(matrix_A, vector_B)
+
+        if (vector_X === false) success_or_fail.textContent = "Calculations failed"
+        else {
+            if (check_roots(matrix_A, vector_B, vector_X) === false) roots.textContent = "Roots don't fit"
+            else roots.textContent = "Roots fit"
+            success_or_fail.textContent = "Calculations were successful"
+        }
+    }
+    
+    
+    
     
 
     renderResults(vector_X)
