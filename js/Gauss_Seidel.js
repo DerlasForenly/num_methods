@@ -46,10 +46,15 @@ function Gauss_Seidel(matrix, b) {
     return x
 
     function check_diag(matrix) {
-        for (let i = 0; i < matrix.length; i++)
-            for (let j = 0; j < matrix.length; j++)
-                if (Math.abs(matrix[i][i]) < Math.abs(matrix[i][j]))
-                    return false
+        for (let i = 0; i < matrix.length; i++) {
+            let sum = 0
+            for (let j = 0; j < matrix.length; j++) {
+                if (i === j) continue
+                sum += matrix[i][j]
+            }
+            if (Math.abs(matrix[i][i]) < Math.abs(sum))
+                return false
+        }
         return true
     }
 
