@@ -4,6 +4,7 @@ function Gauss_Jordan(matrix, b) {
     }
     let x = []
     let n = matrix.length
+    b = [...b]
     matrix = createCopy(matrix)
 
     for (let i = 0; i < n; i++)

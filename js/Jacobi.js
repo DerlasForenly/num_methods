@@ -32,10 +32,13 @@ function Jacobi(matrix, b) {
     matrix = createCopy(matrix)
 
     do {
-        console.log(x)
+        console.log('iterations.....')
         for (let i = 0; i < n; i++) {
             x[i] = f(matrix[i], i, x_tmp)
             e[i] = Math.abs(x_tmp[i] - x[i])
+            if (!isFinite(x[i])) {
+                return false;
+            }
         }
         for (let i = 0; i < n; i++)
             x_tmp[i] = x[i];

@@ -37,6 +37,9 @@ function Gauss_Seidel(matrix, b) {
             x[i] = f(matrix[i], i, x_tmp)
             e[i] = Math.abs(x_tmp[i] - x[i])
             x_tmp[i] = x[i];
+            if (!isFinite(x[i])) {
+                return false;
+            }
         }
     } while(all_true(e, eps));
 

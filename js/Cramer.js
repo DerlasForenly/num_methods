@@ -5,6 +5,7 @@ function Cramer(matrix, vector) {
     let n = matrix.length
 
     if (delta === 0) {
+        console.log('Cramer: delta=0')
         return false
     }
 
@@ -15,14 +16,12 @@ function Cramer(matrix, vector) {
         }
 
         for (let j = 0; j < matrix[i].length; j++) {
-            tmp[j][i] = vector[j]
+            tmp[j][i] = parseFloat(vector[j])
         }
 
         delta_i.push([...tmp])
-        delta_i[i] = det(delta_i[i])
-        if (delta_i[i] === 0) {
-            return false
-        }
+        console.log(delta_i[i], det(delta_i[i]))
+        delta_i[i] = parseFloat(det(delta_i[i]))
         x.push(parseFloat((delta_i[i]) / parseFloat(delta)))
         tmp = []
     }

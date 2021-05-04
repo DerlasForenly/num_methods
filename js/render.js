@@ -100,7 +100,7 @@ file_input.onchange = () => {
         }
         matrix_size.value = matrix.length
 
-        console.table(matrix)
+        //console.table(matrix)
 
         for (let i = 0; i < matrix.length; i++) {
             let div = document.createElement("div")
