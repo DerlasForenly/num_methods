@@ -93,14 +93,9 @@ file_input.onchange = () => {
         for (let i = 0; i < matrix.length; i++) {
             matrix[i] = matrix[i].split(' ')
         }
-        for (let i = matrix.length / 2 - 1; i >= 0 ; i--) {
-            let tmp = matrix[matrix.length - 1]
-            matrix[i].push(tmp[0])
-            matrix.pop()
-        }
         matrix_size.value = matrix.length
 
-        //console.table(matrix)
+        console.table(matrix)
 
         for (let i = 0; i < matrix.length; i++) {
             let div = document.createElement("div")
